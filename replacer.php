@@ -67,6 +67,10 @@ if( isset( $_POST['submit'] ) ) {
 
 		$image_info = @getimagesize($url);
 
+		$info = pathinfo($url);
+		//$image_name =  basename($url,'.'.$info['extension']);
+		$image_name =  basename( $url );
+
 		// It is not a valid image
 		if($image_info === false) {
 			echo '<tr><td>' . $counter . ' / ' . $urls_count . '</td><td colspan="2"><span style="color: red">Image <strong>' . $url . '</strong> skipped. Probably not found.</span></td></tr>';
@@ -76,7 +80,7 @@ if( isset( $_POST['submit'] ) ) {
 		$width = $image_info[0];
 		$height = $image_info[1];
 
-		$placeholdit_new_file = $dir . '/placehold.it-' . $width . 'x' . $height . '.gif';
+		$placeholdit_new_file = $dir . '/' . $image_name;
 
 		if( ! file_exists( $placeholdit_new_file ) ) {
 			$placeholdit = 'http://placehold.it/' . $width . 'x' . $height;
